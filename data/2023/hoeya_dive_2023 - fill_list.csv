@@ -1,0 +1,303 @@
+group,common_name,taxon
+ALGAE,green algae,Acrosiphonia sp.
+ALGAE,sieve kelp,Agarum clathratum
+ALGAE,fringed sea colander klep,Agarum fimbriatum
+ALGAE,broad winged-kelp,Alaria marginata
+ALGAE,beautiful leaf seaweed,Callophyllis sp.
+ALGAE,crustose corallines,Clathromorphum spp.
+ALGAE,spongy cushion,Codium setchellii
+ALGAE,crustose corallines,Corallinophycideae spp.
+ALGAE,five-ribber kelp,Costaria costata
+ALGAE,thin acid kelp,Desmarestia sp.
+ALGAE,rockweed,Fucus distichus evanescens
+ALGAE,dense-clumped kelp,Laminaria sinclairi
+ALGAE,bull kelp,Nereocystis luetkeana
+ALGAE,prickly pear seaweed,Opuntiella californica
+ALGAE,filamentous red algae,Pterothamnion spp.
+ALGAE,brown kelp,Ralfsia sp.
+ALGAE,red algae,red algae
+ALGAE,sugar wrack kelp,Saccharina latissima
+ALGAE,sea lettuce,Ulva sp.
+ALGAE,filamentous red algae,Various spp.
+ALGAE,rusty rock,Hildenbrandia spp.
+ANNELIDA,twin-eyed feather-duster,Bispira spp.
+ANNELIDA,parchment tubeworm,Chaetopterus sp.
+ANNELIDA,Bamboo Worms,Chaetopteridae
+ANNELIDA,orange feather-duster,Chone aurantiacea
+ANNELIDA,ornate tubeworm,Diopatra ornata
+ANNELIDA,roll-top feather duster worm,Eudistylia catharinae
+ANNELIDA,eighteen-scaled worm,Halosydna brevisetosa
+ANNELIDA,twin-eyed feather-duster,Megalomma sp.
+ANNELIDA,slime-tube feather-duster,Myxicola infundibulum
+ANNELIDA,parasol feather-duster,Parasabella media
+ANNELIDA,Ice-cream cone worm,Pectinariidae
+ANNELIDA,white-crowned calcareous tubeworm,Protula pacifica
+ANNELIDA,,Pseudopotamilla
+ANNELIDA,,Sebellida
+ANNELIDA,red trumpet calcareous tubeworm,Serpula columbiana
+ANNELIDA,calcerious tubeworm,Serpula spp.
+ANNELIDA,Spirorbid worms,Spirorbis spp.
+ANNELIDA,Spaghetti worm,Terabellida spp
+ARTHROPODA,hairy-spined crab,Acantholithodes hispidus
+ARTHROPODA,common acorn barnacle,Balanus glandula
+ARTHROPODA,giant acorn barnacle,Balanus nubilus
+ARTHROPODA,rostrate barnacle,Balanus rostratus
+ARTHROPODA,red rock crab,Cancer productus
+ARTHROPODA,longhorn decorator crab,Chorilia longipes
+ARTHROPODA,butterfly crab,Cryptolithodes typicus
+ARTHROPODA,orange hermit crab,Elassochirus gilli
+ARTHROPODA,widehand hermit,Elassochirus tenuimanus
+ARTHROPODA,tube-dwelling sea flea,Erichthonius rubricornis
+ARTHROPODA,sponge eualid,Eualus butleri
+ARTHROPODA,Townsend's eualid,Eualus townsendi
+ARTHROPODA,,Heptacarpus spp.
+ARTHROPODA,elegant coastal shrimp,Heptacarpus decorus
+ARTHROPODA,Kincaid's shrimp,Heptacarpus kincaidi
+ARTHROPODA,Pacific lyre crab,Hyas lyratus
+ARTHROPODA,candy stripe shrimp,Lebbeus grandimanus
+ARTHROPODA,brown box crab,Lopholithodes foraminatus
+ARTHROPODA,Puget Sound king crab,Lopholithodes mandtii
+ARTHROPODA,dungeness crab,Metacarcinus magister
+ARTHROPODA,galatheid crab,Munida quadrispina
+ARTHROPODA,slendor decorator grab,Oregonia gracilis
+ARTHROPODA,backeyed hermit,Pagurus armatus
+ARTHROPODA,Bering hermit,Pagurus beringanus
+ARTHROPODA,hairy hermit,Pagurus hirsutiusculus
+ARTHROPODA,granular hermit,Pagurus granosiminus
+ARTHROPODA,coonstripe shrimp,Pandalus danae
+ARTHROPODA,spiny pink shrimp,Pandalus eous
+ARTHROPODA,heart crab,Phyllolithodes papillosus
+ARTHROPODA,scaled crab,Placetron wosnessenskii
+ARTHROPODA,Scaled Crab,Placetron wosnessenskii
+ARTHROPODA,graceful decorator crab,Pugettia gracilis
+ARTHROPODA,rhinoceros crab,Rhinolithodes wosnessenskii
+ARTHROPODA,sharp-nosed crab,Scyra acutafrons
+ARTHROPODA,Dana's blade shrimp,Spirontocaris lamellicornis
+ARTHROPODA,pygmy redrock crab,Glebocarcinus oregonensis
+BRACHIOPODA,black lamp shell,Hemithiris psittacea
+BRACHIOPODA,California lampshell,Laqueus californicus
+BRACHIOPODA,California lamp shell,Laqueus vancouveriensis
+BRACHIOPODA,transverse lamp shell,Terebratalia transversa
+BRACHIOPODA,snake's head lamp shell,Terebratulina unguicula
+BRYOZOA,,Bugula spp.
+BRYOZOA,stag horn bryo,Heteropora alaskensis
+BRYOZOA,stick bryozoan,Microporina borealis
+BRYOZOA,orange encrusting bryozoan,Schizoporella japonica
+BRYOZOA,,Cyclostomatida
+BRYOZOA,Fan Bryozoan,Dendrobeania murrayana
+CHORDATA,glassy tunicate,Ascidia paratropa
+CHORDATA,broadbase tunicate,Cnemidocarpa finmarkiensis
+CHORDATA,unknown corella,Corella spp. 
+CHORDATA,transparent tunicate,Corella willmeriana
+CHORDATA,compound tunicate,Cystodytes sp.
+CHORDATA,Pacific white crust,Didemnum carnulentum
+CHORDATA,compound tunicate,Didemnum sp.
+CHORDATA,colonial tunicate ,Didemnum sp.
+CHORDATA,pacific sea peach tunicate,Halocynthia aurantium
+CHORDATA,,Halocynthia igaboja
+CHORDATA,warty tunicate,Pyura haustor
+CNIDARIA,ostrich plume hydroids,Aglaophenia spp.
+CNIDARIA,red soft coral,Alcyonium sp. indeterminate
+CNIDARIA,,Anthopleura artemisia
+CNIDARIA,orange cup coral,Balanophyllia elegans
+CNIDARIA,Tan cup coral,Caryophyllia alaskensis
+CNIDARIA,tube-dwelling anenome spp,Ceriantheopsis sp.
+CNIDARIA,,Clava spp.
+CNIDARIA,snakelock anemone,Cribrinopsis fernaldi
+CNIDARIA,solitary pink-mouth hydroid,Ectopleura marina
+CNIDARIA,orange zoanthid,Epizoanthus scotinus
+CNIDARIA,,Garveia groenlandica
+CNIDARIA,sea strawberry,Gersemia rubiformis
+CNIDARIA,spindly embedded hydroid,Grammaria sp.
+CNIDARIA,sea whip,Halipteris willemoesi
+CNIDARIA,muff hydroid,Lafoea dumosa
+CNIDARIA,giant plumose anemone,Metridium farcimen
+CNIDARIA,burrowing anenome ,Pachycerianthus fimbriatus
+CNIDARIA,?,Obelia spp.
+CNIDARIA,,Paracyathus stearnsii
+CNIDARIA,delicate plume hydroid,Plumularia sp.
+CNIDARIA,plumulariid hydroid,Plumulariid sp.
+CNIDARIA,gorgonian coral,Primnoa pacifica
+CNIDARIA,orange sea pen,Ptilosarcus gurneyi
+CNIDARIA,Rhizocaulus hydroid,Rhizocaulus sp.
+CNIDARIA,sertulariid hydroid,Sertulariid sp.
+CNIDARIA,?,Abientinaria spp
+CNIDARIA,white hydroid,Similiclava nivea
+CNIDARIA,spotted swimming anemone,Stomphia coccinea
+CNIDARIA,swimming anemone,Stomphia didemon
+CNIDARIA,branching pink hydrocoral,Stylaster verrillii
+CNIDARIA,,Tubulariidae
+CNIDARIA,pale soft coral,Thrombophyton trachydermum
+CNIDARIA,embedded sea fir hydroids,Thuiaria spp.
+CNIDARIA,bottlebrush hydroid,Thuiaria thuja
+CNIDARIA,mottled anenome,Urticina crassicornus
+CNIDARIA,white spotted rose anenome,Urticina eques
+CNIDARIA,painted anemone,Urticina grebelnyi
+CNIDARIA,white sea pen,Virgularia cf. tuberculata
+ECHINODERMATA,arctic cookie star,Ceramaster arcticus
+ECHINODERMATA,cookie star,Ceramaster patagonicus
+ECHINODERMATA,rose star,Crossaster papposus
+ECHINODERMATA,red sea cucumber,Cucumaria miniata
+ECHINODERMATA,Salt and pepper sea cucumber,Cucumaria piperata
+ECHINODERMATA,Stiff-Footed Sea Cucumber,Eupentacta spp.
+ECHINODERMATA,mottled star,Evasterias troschelii
+ECHINODERMATA,feather star,Florometra serratissima
+ECHINODERMATA,gunpowder star,Gephyreaster swifti
+ECHINODERMATA,basket star,Gorgonocephalus eucnemis
+ECHINODERMATA,,Henricia spp.
+ECHINODERMATA,blood star,Henricia leviuscula
+ECHINODERMATA,fat blood star,Henricia sanguinolenta
+ECHINODERMATA,spiny red star,Hippasteria phrygiana
+ECHINODERMATA,vermilion star,Mediaster aequalis
+ECHINODERMATA,daisy brittle star,Ophiopholis aculeata
+ECHINODERMATA,giant sea cucumber,Parastichopus californicus
+ECHINODERMATA,creeping pedal sea cucumber,Psolus chitonoides
+ECHINODERMATA,wrinkled star,Pteraster militaris
+ECHINODERMATA,slime star,Pteraster tesselatus
+ECHINODERMATA,sunflower star,Pycnopodia helianthoides
+ECHINODERMATA,morning sun star,Solaster dawsoni
+ECHINODERMATA,northern sun star,Solaster endeca
+ECHINODERMATA,orange sun star,Solaster sp. == S. paxillatus
+ECHINODERMATA,striped sun star,Solaster stimpsoni
+ECHINODERMATA,green sea urchin,Strongylocentrotus droebachiensis
+ECHINODERMATA,white sea urchin,Strongylocentrotus pallidus
+ECHINODERMATA,purple sea urchin,Strongylocentrotus purpuratus
+ECHINODERMATA,long-spined sea cucumber,Synallactes challengeri
+FISHES,northern spearnose poacher,Agonopsis vulsa
+FISHES,scalyhead sculpin,Artedius harringtoni
+FISHES,smoothhead sculpin,Artedius lateralis
+FISHES,tubesnout,Aulorhynchus flavidus
+FISHES,decorated warbonnet,Chirolophis decoratus
+FISHES,unknown sculpins,Cottoidea spp.
+FISHES,Stripe Perch,Embiotoca lateralis
+FISHES,buffalo sculpin,Enophrys bison
+FISHES,leister sculpin,Enophrys lucasi
+FISHES,Pacific spiny lumpsucker,Eumicrotremus orbis
+FISHES,red Irish lord,Hemilepidotus hemilepidotus
+FISHES,bigmouth sculpin,Hemitripterus bolini
+FISHES,kelp greenling,Hexagrammos decagrammus
+FISHES,whitespotted greenling,Hexagrammus stelleri
+FISHES,longfin sculpin,Jordania zonope
+FISHES,rock sole,Lepidopsetta bilineata
+FISHES,marbled snailfish,Liparis dennyi
+FISHES,snake prickleback,Lumpenus sagitta
+FISHES,Pacific tomcod,Microgadus proximus
+FISHES,great sculpin,Myoxocephalus polyacanthocephalus
+FISHES,sailfin sculpin,Nautichthys oculofasciatus
+FISHES,lingcod,Ophiodon elongatus
+FISHES,English sole,Parophrys vetulus
+FISHES,starry flounder,Platichthys stellatus
+FISHES,C-O sole,Pleuronichthys coenosus
+FISHES,sturgeon poacher,Podothecus accipenserinus
+FISHES,quillfish,Ptilichthys goodei
+FISHES,pile perch,Rhacochilus vacca
+FISHES,grunt sculpin,Rhamphocottus richardsonii
+FISHES,northern ronquil,Ronquilus jordani
+FISHES,copper rockfish,Sebastes caurinus
+FISHES,dusky rockfish,Sebastes ciliatus
+FISHES,Puget Sound rockfish,Sebastes emphaeus
+FISHES,yellowtail rockfish,Sebastes flavidus
+FISHES,quillback rockfish,Sebastes maliger
+FISHES,black rockfish,Sebastes melanops
+FISHES,YOY black-yellowtail rockfish complex,Sebastes melanops- flavidus complex
+FISHES,ribbed sculpin,Triglops pingelii
+FISHES,painted greenling,Oxylebius pictus
+MAMMALS,Dall's porpoise,Phocoenoides dalli
+MAMMALS,Harbour porpoise,Phocoena phocoena
+MAMMALS,Steller sea lion,Eumetopias jubatus
+MAMMALS,Pacific white-sided dolphin,Lagenorhynchus obliquidens
+MAMMALS,Humpback whale,Megaptera novaeangliae
+MAMMALS,Pacific harbour seal,Phoca vitulina richardsi
+MOLLUSCA,,Adalaria spp.
+MOLLUSCA,wrinkled amphissa,Amphissa columbiana
+MOLLUSCA,,Amphissa versicolor
+MOLLUSCA,Baird's margarite,Bathybembix bairdi
+MOLLUSCA,,Berthella californica
+MOLLUSCA,modest cadlina,Cadlina modesta
+MOLLUSCA,variable topsnail,Calliostoma variegatum
+MOLLUSCA,cockles,Cardiidae
+MOLLUSCA,leafy hornmouth,Ceratostoma foliatum
+MOLLUSCA,spiny pink scallop,Chlamys hastata
+MOLLUSCA,Nuttall's cockle,Clinocardium nuttallii
+MOLLUSCA,,Coryphella verrurosa
+MOLLUSCA,ribbed keyhole limpet,Cranopsis cucullata
+MOLLUSCA,giant Pacific chiton,Cryptochiton stelleri
+MOLLUSCA,unknown dendronotus nudibranch,Dendronotus sp.
+MOLLUSCA,rough keyhole limpet,Diadora aspera
+MOLLUSCA,gold dorid,Dirona pellucida
+MOLLUSCA,giant Pacific octopus,Enteroctopus dofleini
+MOLLUSCA,ugly clam,Entodesma navicula
+MOLLUSCA,aeolid nudibranch,Flabellina spp.
+MOLLUSCA,,Flabellina japonica
+MOLLUSCA,Oregon triton,Fusitriton oregonensis
+MOLLUSCA,nestler clam,Hiatella sp.
+MOLLUSCA,red-gilled nudibranch,Himatina trophina
+MOLLUSCA,,Lepidochitona dentiens
+MOLLUSCA,,Lepidozona spp.
+MOLLUSCA,Merten's chiton,Lepidozona mertensii
+MOLLUSCA,shield limpet,Lottia pelta
+MOLLUSCA,true limpet,Lottia scutum
+MOLLUSCA,,Macoma spp.
+MOLLUSCA,puppet margarite,Margarites pupillus
+MOLLUSCA,Stearn's Ear Shell,Marsenina stearnsii
+MOLLUSCA,straight horsemussel,Modiolus rectus
+MOLLUSCA,mossy chiton,Mopalia muscosa
+MOLLUSCA,,Mopalia vespertina
+MOLLUSCA,hairy chiton,Mopalia sp.
+MOLLUSCA,truncated softshell clam,Mya truncata
+MOLLUSCA,,Mytilus spp.
+MOLLUSCA,pacific blue mussel,Mytilus trossulus
+MOLLUSCA,winged trophon,Nipponotrophon stuarti
+MOLLUSCA,wrinkled dogwinkle,Nucella lamellosa
+MOLLUSCA,sculptured rocksnail,Ocinebrina interfossa
+MOLLUSCA,barnacle-eating nudibranch,Onchidoris bilamellata
+MOLLUSCA,three lined aeolid,Orienthella trilineata
+MOLLUSCA,Pacific geoduck,Panopea generosa
+MOLLUSCA,red veiled chiton,Placiphorella rufa
+MOLLUSCA,Washington butter clam,Saxidomus gigantea
+MOLLUSCA,,Scabrotrophon spp.
+MOLLUSCA,orange-peel nudibranch,Tochuina gigantea
+MOLLUSCA,giant orange tochui,Tochuina tetraquetra
+MOLLUSCA,,Tonicella sp.
+MOLLUSCA,white-lined chiton,Tonicella insignis
+MOLLUSCA,lined chiton,Tonicella lineata
+MOLLUSCA,blue-lined chiton,Tonicella undocaerulea
+MOLLUSCA,horse clam,Tresus capax
+MOLLUSCA,checkered hairysnail,Trichotropis cancellata
+MOLLUSCA,clown nudibranch,Triopha catalinae
+MOLLUSCA,three-rib chiton,Tripolax trifida
+MOLLUSCA,three-rib chiton,Tripoplax trifida
+MOLLUSCA,diamondback nudibranch,Tritonia festiva
+MOLLUSCA,pink tritonia,Tritonia sp.
+MOLLUSCA,tiny grey mussel,
+NEMERTEA,,Tubulanus sexlineatus
+PORIFERA,flabby bowl sponge,Amphilectus digitatus infundibulus
+PORIFERA,cloud sponge,Aphrocallistes vastus
+PORIFERA,peach ball sponge,cf. Suberites
+PORIFERA,green-tinged sponge,Halichondria (Eumastia) sitiens
+PORIFERA,sponge,Halsarca/Oscarella sp.
+PORIFERA,sponge,Hymetrochota sp.
+PORIFERA,white reticulated sponge,Iophon lamella
+PORIFERA,orange finger sponge,Isodictya rigida
+PORIFERA,sponge,Lissodendoryx sp.
+PORIFERA,pipe cleaner sponge,Lycopodina occidentalis
+PORIFERA,sponge,Mycale (Aegogropila) adhaerens
+PORIFERA,brain sponge,Plakina atka
+PORIFERA,aggegrated nipple sponge,Polymastia pachymastia
+PORIFERA,sponges,Raspailiidae
+PORIFERA,sharp-lipped boot sponge,Rhabdocalyptus dawsoni
+PORIFERA,wide-lipped boot sponge,Staurocalyptus dowlingi
+PORIFERA,funnel sponge,Semisuberites cribrosa
+PORIFERA,hermit crab sponge,Suberites latus
+PORIFERA,leather bag sponge,Sycandra cf. utriculus
+PORIFERA,sponge,Weberella sp.
+PORIFERA,sulphur sponge,Myxilla lacunosa
+SIPUNCULA,peanut worm,Sipunculidae
+,unkown hydroid,hydroid spp.
+,breast sponge,Eumastia sitiens
+,unknown barnacle,barnacle spp.
+,crimson anemone,Cribrinopsis fernaldi
+,spot prawn,Pandalas platyceros
+,spotted ratfish,Hydrolagus colliei
+,,
+,na,no species recorded
