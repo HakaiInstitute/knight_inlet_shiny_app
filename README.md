@@ -1,4 +1,1 @@
-"# Knight-Inlet-App" 
-"# Knight-Inlet-App" 
-"# knight-inlet-app" 
-"# knight-inlet-app" 
+Interactive application to explore community data from ecosystem surveys in Knight Inlet IPCA
