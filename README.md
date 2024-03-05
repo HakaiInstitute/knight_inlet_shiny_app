@@ -1,4 +1,4 @@
 # Biodiveristy in the Gwaxdlala/Nalaxdlala IPCA Marine Refuge
 Interactive application to explore community data from ecosystem surveys in Knight Inlet IPCA 
 
-<img src="readme_image/knight_screenshot.png">
+<img src="readme_png/knight_screenshot.png">
