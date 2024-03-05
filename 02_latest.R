@@ -6,15 +6,24 @@ library(leaflet)
 library(DT)
 library(dplyr)
 library(viridis)
+library(reactable)
+library(readr)
+library(here)
+library(readxl)
 
-site_coords <- site_coords
-site_spp_list <- readRDS("~/knight inlet eDNA/shinyapp/App-1/data/knight-site-spp-tables.rds")
+getwd()
+# load data ---------------------------------------------------------------
+#source(here::here("App-1/00_initialize_data.R"))
+
+#site_coords <- read_csv("site-coords.csv")
+#site_coords <- site_coords
+#site_spp_list <- readRDS("~/knight inlet eDNA/shinyapp/App-1/data/knight-site-spp-tables.rds")
+#species_list <- readRDS("~/knight inlet eDNA/shinyapp/App-1/data/knight-species-list.rds")
 
 # establish pallete
 pal_rich <- colorNumeric(
   palette = "viridis",
   domain = site_coords$sppr)
-
 
 
 
@@ -39,7 +48,7 @@ ui <- dashboardPage(
             choicesOpt = list(content = species_list),
             
           ), choices = NULL, width = 4),  # Placeholder for species choices
-      box(title = "Color Code by Species Richness", status = "warning", solidHeader = TRUE,
+      box(title = "Color Code", status = "warning", solidHeader = TRUE,
           radioGroupButtons(
             inputId = "colorCode",
             label = "Color by:", 
@@ -214,7 +223,7 @@ server <- function(input, output, session) {
     if (is.null(site)) {
       species <- data.frame(Species = character(0))  # Empty data frame if no site is selected
     } else {
-      species <- data.frame(Species = full_spp_list[[site]])
+      species <- data.frame(Species = site_spp_list[[site]])
     }
     reactable(species,
               pagination = F,
