@@ -17,17 +17,6 @@ pal_rich <- colorNumeric(
 
 
 
-# Footer  -----
-fluidRow(id = "footer",
-         column(2),
-         column(8,
-                HTML("<center><p style='size:18px';>
-                     App Development by <a href='https://jakelawlor.github.io/' target='_blank'>Jake Lawlor</a><br>
-                     </p></center>")),
-         column(2)
-         
-) # end footer fluidrow
-
 
 ui <- dashboardPage(
   dashboardHeader(title = "Biodiveristy in the Gwaxdlala/Nalaxdlala IPCA Marine Refuge", 
