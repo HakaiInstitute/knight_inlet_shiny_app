@@ -26,12 +26,12 @@ library(tibble)
 library(stringr)
 
 # Save all cleaned datasets as RDS
-
+setwd("C:/Users/alex.schmill/Documents/knight inlet eDNA/shinyapp/App-1/data") # "C:/Users/alex.schmill/Documents/knight inlet eDNA/shinyapp/App-1/data"
 
 #### 2023 data ####
 
 ## load the meta data
-metadata_2023 <- read_excel("App-1/data/2023/hoeya_metadata_2023.xlsx")
+metadata_2023 <- read_excel("2023/hoeya_metadata_2023.xlsx")
 metadata_2023$date <- as.Date(metadata_2023$date)
 metadata_2023$year <- as.numeric(format(metadata_2023$date, "%Y"))
 
@@ -40,7 +40,7 @@ colnames(site_coords)[5] <- "lat"
 colnames(site_coords)[6] <- "long"
 
 ## load fill list
-hoeya_dive_2023_fill_list <- read_csv("App-1/data/2023/hoeya_dive_2023 - fill_list.csv")
+hoeya_dive_2023_fill_list <- read_csv("2023/hoeya_dive_2023 - fill_list.csv")
 hoeya_dive_2023_fill_list <- hoeya_dive_2023_fill_list %>%
   rename(species_scientific = taxon) %>%  
   rename(corrected_comnam = common_name) %>%
@@ -55,13 +55,13 @@ hoeya_dive_2023_fill_list <- hoeya_dive_2023_fill_list %>%
     species_scientific == "<i>barnacle spp.</i>" ~ "ARTHROPODA",
     TRUE ~ group)) %>%
   #filter(!is.na(group)) %>%
-  unique() %>%
+  unique() #%>%
   #mutate(species = str_c(species_scientific.y, corrected_comnam, sep = " - ")) #%>%
-  select(c(1,2))
+  #select(c(1,2))
   
 
 ## load species data
-hoeya_dive_2023 <- read_excel("App-1/data/2023/hoeya_dive_2023.xlsx", 
+hoeya_dive_2023 <- read_excel("2023/hoeya_dive_2023.xlsx", 
                               sheet = "biodiversity")
 
 # remove extra rows brought in from google sheet 
@@ -93,12 +93,13 @@ hoeya_dive_2023_fixed_names <- hoeya_dive_2023_sci_com %>%
     species_common == "solaster spp" ~ "solaster sp.",
     species_common == "stick bryo" ~ "stick bryozoan",
     species_common == "stylaster" ~ "stylaster sp.",
-    species_common == "tiny grey mussel" ~ "bay mussel",
+    species_common == "tiny grey mussel" ~ "pacific blue mussel",
     species_common == "vieled chiton" ~ "veiled chiton",
     species_common == "california cucumber" ~ "california sea cucumber",
     species_common == "ceratostoma" ~ "leafy hornmouth",
     species_common == "brachiopods" ~ "lampshell",
     species_common == "sea perch" ~ "sea peach",
+    species_common == "plumose anenome" ~ "giant plumose anemone",
     TRUE ~ corrected_comnam)) %>%
   mutate(species_scientific = case_when(
     corrected_comnam == "California lampshell" ~ "Laqueus californicus",
@@ -121,8 +122,14 @@ hoeya_dive_2023_fixed_names <- hoeya_dive_2023_sci_com %>%
     corrected_comnam == "california sea cucumber" ~ "Parastichopus californicus",
     corrected_comnam == "leafy hornmouth" ~ "Ceratostoma foliatum",
     corrected_comnam == "dungeness crab" ~ "Metacarcinus magister",
-    corrected_comnam == "bay mussel" ~ "Mytilus trossulus",
+    corrected_comnam == "pacific blue mussel" ~ "Mytilus trossulus",
     corrected_comnam == "sea peach" ~ "Halocynthia aurantium",
+    corrected_comnam == "green sea urchin" ~ "Strongylocentrotus droebachiensis",
+    corrected_comnam == "crustose corallines" ~ "Clathromorphum sp.",
+    corrected_comnam == "giant plumose anemone" ~ "Metridium farcimen",
+    corrected_comnam == "stick bryozoan" ~ "Microporina borealis",
+    corrected_comnam == "stylaster coral" ~ "Stylaster verrillii",
+    corrected_comnam == "orange encrusting bryozoan" ~ "Schizoporella japonica",
     TRUE ~ species_scientific)) %>%
   mutate(corrected_comnam = case_when(
     species_scientific == "Alaria marginata" ~ "broad winged-kelp",
@@ -131,7 +138,8 @@ hoeya_dive_2023_fixed_names <- hoeya_dive_2023_sci_com %>%
   mutate(corrected_comnam = str_to_title(corrected_comnam)) %>% # capitalize every word in common name
   mutate(species_scientific = sprintf("<i>%s</i>", species_scientific)) %>%  # surround scientific names with italic symbol
   left_join(hoeya_dive_2023_fill_list) %>%
-  unique()
+  unique() %>%
+  filter(species_scientific != '<i>NA</i>')
   
   
 # just keep common and fixed common columns
@@ -150,18 +158,27 @@ hoeya_dive_2023_clean <- hoeya_dive_2023 %>%
   left_join(hoeya_dive_2023_comnam_fixed, by = "species_common") %>%
   left_join(hoeya_dive_2023_scinam_fixed, by = "corrected_comnam") %>%
   mutate(species = str_c(species_scientific.y, corrected_comnam, sep = " - ")) %>%
-  select(-c(4,5,8:12))
+  select(-c(4,5,8:12)) %>%
+  filter(!is.na(species))
 
 # add a year column 
 hoeya_dive_2023_clean$year <- as.numeric(format(hoeya_dive_2023_clean$date, "%Y"))
 
 
+#### create species_list
+species_list <- unique(hoeya_dive_2023_clean$species) 
+species_list <- sort(species_list)
+
+saveRDS(species_list, file = "knight-species-list.rds")
+
 #### create large list object for shiny ####
 # copying `calvert-site-spp-tables`: sites are of type "list" which include, species, group and numerous trials
 
 # Splitting the dataframe into a list by site_id
-`knight-site-spp-tables` <- split(hoeya_dive_2023_clean$species, hoeya_dive_2023_clean$site)  # may need to change combine site and year to create site_id when other years are incorporated
+sorted_hoeya_dive_2023_clean <- hoeya_dive_2023_clean %>%
+  arrange(species)
 
+`knight-site-spp-tables` <- split(sorted_hoeya_dive_2023_clean$species, sorted_hoeya_dive_2023_clean$site)  # may need to change combine site and year to create site_id when other years are incorporated
 saveRDS(`knight-site-spp-tables`, file = "knight-site-spp-tables.rds")
 
 #### species richness ####
@@ -195,9 +212,21 @@ sppr_df <- sppr %>%
 
 site_coords <- left_join(site_coords, sppr_df)
 
-site_coords <- na.omit(site_coords)
+# final formatting of site_coords
+site_coords <- site_coords %>%
+  mutate(survey = str_to_title(survey)) %>% # capitalize every word in common name
+  mutate(area = str_to_title(area)) %>%
+  mutate(objective = str_to_title(objective)) %>%
+  mutate(survey = case_when(
+    survey == "Rov" ~ "ROV",
+    TRUE ~ survey))
 
+# KNI26 and KNI28 overlap, so stagger them
+site_coords$long[13] <- "-125.9990"  # changed from -125.9989
+site_coords$long <- as.numeric(site_coords$long)
 
+write.csv(site_coords, "C:/Users/alex.schmill/Documents/knight inlet eDNA/shinyapp/App-1/data/site-coords.csv")
 
+#site_coords <- na.omit(site_coords)
 
-
+getwd()

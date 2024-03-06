@@ -10,6 +10,7 @@ library(reactable)
 library(readr)
 library(here)
 library(readxl)
+library(MetBrewer)
 
 getwd()
 # load data ---------------------------------------------------------------
@@ -24,6 +25,20 @@ getwd()
 pal_rich <- colorNumeric(
   palette = "viridis",
   domain = site_coords$sppr)
+
+pal_depth <- colorNumeric(
+  palette = viridis::mako(100, direction = -1)[10:100],
+  domain = site_coords$max_depth)
+
+pal_coralpres <- colorFactor(
+  palette = c("red","grey90"),
+  levels = c("Yes","No")
+)
+
+pal_method <- colorFactor(
+  palette = c(met.brewer("Signac",2)),  # adjust the number as the number survey types increase
+  domain = site_coords$survey)
+
 
 
 
@@ -48,12 +63,15 @@ ui <- dashboardPage(
             choicesOpt = list(content = species_list),
             
           ), choices = NULL, width = 4),  # Placeholder for species choices
-      box(title = "Color Code", status = "warning", solidHeader = TRUE,
+      box(title = HTML("Color Code"), status = "warning", solidHeader = TRUE,
           radioGroupButtons(
             inputId = "colorCode",
             label = "Color by:", 
             choices = list("Default" = "default", 
-                           "Total Species" = "richness"),
+                           "Total Species" = "richness",
+                           "Survey Method" = "method",
+                           "Red Tree Coral" = "coralpres",
+                           "Depth" = "depth"),
             status = "primary",
             selected = "default",
             individual = TRUE,
@@ -92,6 +110,7 @@ server <- function(input, output, session) {
       addProviderTiles(providers$CartoDB.Voyager) %>%
       addMapPane("yellow outlines", zIndex=600) %>% 
       addMapPane("depth points",zIndex=500) %>%
+      addMapPane("coral points",zIndex=450) %>%
       
       addCircleMarkers(data = site_coords,
                        lat = ~lat,
@@ -108,6 +127,7 @@ server <- function(input, output, session) {
                                     <b>Survey Objective: </b>", site_coords$objective, "<br>
                                     <b>Total Species: </b>", site_coords$sppr),
                        fillOpacity = .8,
+                       clusterOptions = markerClusterOptions(maxClusterRadius = 8),
                        group = "all_sites") %>%
       
       # add and hide richness dots
@@ -125,30 +145,143 @@ server <- function(input, output, session) {
                                     <b>Survey Objective: </b>", site_coords$objective, "<br>
                                     <b>Total Species: </b>", site_coords$sppr),
                        fillOpacity = 1,
+                       clusterOptions = markerClusterOptions(maxClusterRadius = 8),
                        options = markerOptions(interactive = FALSE,
                                                pane = "depth points"),
                        group = "richness") %>%
-      hideGroup("richness")
+      hideGroup("richness") %>%
+      
+      # add and hide richness dots
+      addCircleMarkers(data = site_coords,
+                       lat = ~lat,
+                       lng = ~long,
+                       weight = 0,
+                       radius = 5,
+                       fillColor = ~pal_depth(max_depth),
+                       color = "black",
+                       popup = paste0("<b>Site: </b>", site_coords$site," <br>
+                                    <b>Survey Method: </b>", site_coords$survey, "<br>
+                                    <b>Site Name: </b>", site_coords$area, "<br>
+                                    <b>Max Depth: </b>", site_coords$max_depth,"m","<br>
+                                    <b>Survey Objective: </b>", site_coords$objective, "<br>
+                                    <b>Total Species: </b>", site_coords$sppr),
+                       fillOpacity = 1,
+                       clusterOptions = markerClusterOptions(maxClusterRadius = 8),
+                       options = markerOptions(interactive = FALSE,
+                                               pane = "depth points"),
+                       group = "depth") %>%
+      hideGroup("depth") %>%  
+      
+      # add and hide coralpres dots
+      addCircleMarkers(data = site_coords,
+                       lat = ~lat,
+                       lng = ~long,
+                       weight = 0,
+                       radius = 5,
+                       fillColor = ~pal_coralpres(`Primnoa present`),
+                       color = "black",
+                       popup = paste0("<b>Site: </b>", site_coords$site," <br>
+                                    <b>Survey Method: </b>", site_coords$survey, "<br>
+                                    <b>Site Name: </b>", site_coords$area, "<br>
+                                    <b>Max Depth: </b>", site_coords$max_depth,"m","<br>
+                                    <b>Survey Objective: </b>", site_coords$objective, "<br>
+                                    <b>Total Species: </b>", site_coords$sppr),
+                       fillOpacity = 1,
+                       clusterOptions = markerClusterOptions(maxClusterRadius = 8),
+                       options = markerOptions(interactive = FALSE,
+                                               pane = "coral points"),
+                       group = "coralpres") %>%
+      hideGroup("coralpres") %>%
+      
+      # add and hide method dots
+      addCircleMarkers(data = site_coords,
+                       lat = ~lat,
+                       lng = ~long,
+                       weight = 0,
+                       radius = 5,
+                       fillColor = ~pal_method(survey),
+                       color = "black",
+                       popup = paste0("<b>Site: </b>", site_coords$site," <br>
+                                    <b>Survey Method: </b>", site_coords$survey, "<br>
+                                    <b>Site Name: </b>", site_coords$area, "<br>
+                                    <b>Max Depth: </b>", site_coords$max_depth,"m","<br>
+                                    <b>Survey Objective: </b>", site_coords$objective, "<br>
+                                    <b>Total Species: </b>", site_coords$sppr),
+                       fillOpacity = 1,
+                       clusterOptions = markerClusterOptions(maxClusterRadius = 8),
+                       options = markerOptions(interactive = FALSE,
+                                               pane = "coral points"),
+                       group = "method") %>%
+      hideGroup("method")
     
   })  # end render leaflet
   
   
+  site_coords_nona <- site_coords %>%  # create a dataframe that doesn't contain NAs in the sppr column 
+    filter(!is.na(sppr))
   
-  
+  # Build new map when color code buttons are pressed
   myLeafletProxy <- leafletProxy(mapId = "map", session)
   
-  # add sampledepth layer when group button is clicked
+  # add species richness layer when button is clicked
   observe({
     req("richness" %in% input$colorCode)
     leafletProxy("map") %>%
-      #hideGroup(c("total_spp","habitat_type")) %>% will add to this as more layers get added
+      hideGroup(c("coralpres","depth")) %>% 
       clearControls() %>%
       showGroup("richness") %>%
-      leaflet::addLegend(data = site_coords,
+      leaflet::addLegend(data = site_coords_nona,
                          pal = pal_rich,
                          title = paste0("Species<br>Richness"),
                          values = ~sppr,
                          layerId = "sppr",
+                         opacity = 1)
+  })
+  
+  # add depth layer when button is clicked
+  observe({
+    req("depth" %in% input$colorCode)
+    leafletProxy("map") %>%
+      hideGroup(c("richness","coralpres","method")) %>% 
+      clearControls() %>%
+      showGroup("depth") %>%
+      leaflet::addLegend(data = site_coords,
+                         pal = pal_depth,
+                         title = paste0("Depth"),
+                         values = ~max_depth,
+                         layerId = "depth",
+                         opacity = 1)
+  })
+  
+  # add coralpres layer when group button is clicked
+  observe({
+    req("coralpres" %in% input$colorCode)
+    leafletProxy("map") %>%
+      hideGroup(c("richness","depth","method")) %>%
+      clearControls() %>%
+      #removeControl(layerId = c("depthlegend","habitat_type")) %>%
+      showGroup("coralpres") %>%
+      leaflet::addLegend(data = site_coords_nona,
+                         pal = pal_coralpres,
+                         title = paste0("Red Tree<br>Coral Present?"),
+                         values = ~`Primnoa present`,
+                         layerId = "coralpres",
+                         opacity = 1)
+  })
+  
+  # add method layer when group button is clicked
+  observe({
+    req("method" %in% input$colorCode)
+    leafletProxy("map") %>%
+      hideGroup(c("richness","depth", "coralpres")) %>%
+      clearControls() %>%
+      #removeControl(layerId = c("depthlegend","habitat_type")) %>%
+      showGroup("method") %>%
+      leaflet::addLegend(data = site_coords,
+                         pal = pal_method,
+                         title = paste0("Survey Method"),
+                         values = ~survey,
+                         layerId = "method",
                          opacity = 1)
   })
   
@@ -160,7 +293,7 @@ server <- function(input, output, session) {
       clearControls() %>%
       #removeControl(layerId = c("total_spp","depthlegend")) %>%
       
-      hideGroup(c("richness"))
+      hideGroup(c("richness","depth","coralpres","method"))
   })
   
   
@@ -198,9 +331,10 @@ server <- function(input, output, session) {
                          #popup = paste("<b>Site:</b>", site_coords$site," <br>
                          #           <b>Species:</b>", site_coords$total_spp),
                          fillOpacity = .8,
+                         clusterOptions = markerClusterOptions(maxClusterRadius = 8),
                          options = markerOptions(interactive = FALSE,
                                                  pane = "yellow outlines"),
-        ) 
+                         group = "selected_sites") 
       
     }
   }, ignoreNULL = F) 
