@@ -79,7 +79,7 @@ ui <- dashboardPage(
           ),
           width = 4),
       box(title = "Species List", status = "warning", solidHeader = TRUE,
-          reactableOutput("speciesTable", width = "100%"), width = 4)
+          reactableOutput("speciesTable", width = "100%", height= '250px'), width = 4)
     ),
     
     fluidRow(id = "footer",
@@ -363,6 +363,7 @@ server <- function(input, output, session) {
               pagination = F,
               compact = T,
               borderless = TRUE,
+              defaultPageSize = nrow(species), # Show all rows, adjust as needed
               columns = list(Species = colDef(html = TRUE)))
   })
   
