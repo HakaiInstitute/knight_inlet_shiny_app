@@ -28,7 +28,7 @@ library(stringr)
 # Save all cleaned datasets as RDS
 setwd("C:/Users/alex.schmill/Documents/knight inlet eDNA/shinyapp/App-1/data") # "C:/Users/alex.schmill/Documents/knight inlet eDNA/shinyapp/App-1/data"
 
-#### 2023 data ####
+#### 2023 data -----------------------------------------------------------------
 
 ## load the meta data
 metadata_2023 <- read_excel("2023/hoeya_metadata_2023.xlsx")
@@ -150,6 +150,7 @@ hoeya_dive_2023_comnam_fixed <- select(hoeya_dive_2023_fixed_names, c(2,3)) %>%
 hoeya_dive_2023_scinam_fixed <- select(hoeya_dive_2023_fixed_names, c(3,1)) %>%
   unique()
 
+
 # make date a date
 hoeya_dive_2023_clean$date <- as.Date(hoeya_dive_2023_clean$date)
 
@@ -157,7 +158,7 @@ hoeya_dive_2023_clean$date <- as.Date(hoeya_dive_2023_clean$date)
 hoeya_dive_2023_clean <- hoeya_dive_2023 %>%
   left_join(hoeya_dive_2023_comnam_fixed, by = "species_common") %>%
   left_join(hoeya_dive_2023_scinam_fixed, by = "corrected_comnam") %>%
-  mutate(species = str_c(species_scientific.y, corrected_comnam, sep = " - ")) %>%
+  mutate(species = str_c(corrected_comnam, species_scientific.y, sep = " - ")) %>%
   select(-c(4,5,8:12)) %>%
   filter(!is.na(species))
 
@@ -170,6 +171,14 @@ species_list <- unique(hoeya_dive_2023_clean$species)
 species_list <- sort(species_list)
 
 saveRDS(species_list, file = "knight-species-list.rds")
+
+
+
+#### 2021 data -----------------------------------------------------------------
+
+
+
+
 
 #### create large list object for shiny ####
 # copying `calvert-site-spp-tables`: sites are of type "list" which include, species, group and numerous trials
@@ -227,6 +236,4 @@ site_coords$long <- as.numeric(site_coords$long)
 
 write.csv(site_coords, "C:/Users/alex.schmill/Documents/knight inlet eDNA/shinyapp/App-1/data/site-coords.csv")
 
-#site_coords <- na.omit(site_coords)
 
-getwd()
