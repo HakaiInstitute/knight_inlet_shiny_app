@@ -14,10 +14,9 @@ library(MetBrewer)
 
 getwd()
 # load data ---------------------------------------------------------------
-#source(here::here("App-1/00_initialize_data.R"))
 
-#site_coords <- read_csv("site-coords.csv")
-#site_coords <- site_coords
+# Load in these objects then return to comments before running app
+#site_coords <- read_csv("~/knight inlet eDNA/shinyapp/App-1/data/site-coords.csv")
 #site_spp_list <- readRDS("~/knight inlet eDNA/shinyapp/App-1/data/knight-site-spp-tables.rds")
 #species_list <- readRDS("~/knight inlet eDNA/shinyapp/App-1/data/knight-species-list.rds")
 
