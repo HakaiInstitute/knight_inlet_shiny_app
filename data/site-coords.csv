@@ -1,0 +1,43 @@
+"","year","site","survey","area","lat","long","objective","max_depth","Primnoa present","substrate","complexity","sppr"
+"1",2023,"KNI19","Scuba","Prominent Point",50.670102,-126.005403,"Biodiversity",33,"Yes","Bedrock",1,12
+"2",2023,"KNI20","Scuba","Hoeya Head",50.685019,-125.995744,"Biodiversity",18,"Yes","Boulders",3,27
+"3",2023,"KNI21","Scuba","Lull Bay",50.695585,-126.000379,"Biodiversity",33,"No","Bedrock",1,18
+"4",2023,"KNI16","Scuba","Lull Bay",50.692668,-126.02533,"Sea Star",14,"NA",NA,NA,16
+"5",2023,"KNI22","Scuba","Prominent Point",50.667723,-126.013772,"Biodiversity",30,"No","Bedrock",1,28
+"6",2023,"KNI23","Scuba","Hoeya Head",50.685545,-125.997802,"Biodiversity",19,"Yes","Boulders",4,14
+"7",2023,"KNI24","Scuba","Lull Bay",50.690875,-126.035847,"Biodiversity",27,"No","Bedrock",2,24
+"8",2023,"KNI13","Scuba","Hoeya Head",50.688822,-125.976053,"Sea Star",14,"NA",NA,NA,22
+"9",2023,"KNI25","Scuba","Prominent Point",50.665981,-125.987113,"Biodiversity",30,"No","Bedrock",1,24
+"10",2023,"KNI26","Scuba","Hoeya Head",50.683503,-125.998888,"Biodiversity",27,"No","Boulders",2,2
+"11",2023,"KNI27","Scuba","Rest Islet",50.664264,-126.02767,"Biodiversity",27,"No","Bedrock",2,26
+"12",2023,"KNI14","Scuba","Prominent Point",50.667917,-126.013814,"Sea Star",13,"NA",NA,NA,15
+"13",2023,"KNI28","Scuba","Hoeya Head",50.68339,-125.998126,"Biodiversity",34,"Yes","Boulders",3,NA
+"14",2023,"KNI29","Scuba","Lull Bay",50.680053,-126.067439,"Biodiversity",28,"No","Bedrock",1,25
+"15",2023,"DFO Transect #1","ROV",NA,50.672028,-126.005874,"Red Tree Coral Survey",55,"Yes",NA,NA,NA
+"16",2023,"DFO Transect #2","ROV",NA,50.677509,-126.008364,"Red Tree Coral Survey",60,"Yes",NA,NA,NA
+"17",2023,"DFO Transect #3","ROV",NA,50.681796,-125.99864,"Red Tree Coral Survey",36,"Yes",NA,NA,NA
+"18",2023,"DFO Transect #4","ROV",NA,50.684168,-125.969277,"Red Tree Coral Survey",230,"No",NA,NA,NA
+"19",2023,"DFO Transect #5","ROV",NA,50.6756,-125.973015,"Red Tree Coral Survey",210,"No",NA,NA,NA
+"20",2023,"DFO Transect #6","ROV",NA,50.671167,-125.982867,"Red Tree Coral Survey",160,"Yes",NA,NA,NA
+"21",2023,"Lull Bay #1","ROV",NA,50.69645,-125.9854833,"Biodiversity",95,"No",NA,NA,NA
+"22",2023,"Lull Bay #2","ROV",NA,50.69688,-125.9841333,"Biodiversity",100,"No",NA,NA,NA
+"23",2023,"Hoeya Head #1","ROV",NA,50.68283,-125.998583,"Biodiversity",40,"Yes",NA,NA,NA
+"24",2023,"Hoeya Head #2","ROV",NA,50.6828,-125.99875,"Biodiversity",49,"Yes",NA,NA,NA
+"25",2020,"KNI1",NA,"Hoeya Sill",50.685613,-125.993685,"Biodiversity",17,NA,NA,NA,NA
+"26",2020,"KNI2",NA,"Hoeya Sill",50.686506,-125.968675,"Biodiversity, Seastar",18,NA,NA,NA,5
+"27",2020,"KNI3",NA,"Glendale",50.684395,-125.822996,"Biodiversity",26,NA,NA,NA,NA
+"28",2020,"KNI4",NA,"Glendale",50.682032,-125.760149,"Biodiversity",13,NA,NA,NA,NA
+"29",2020,"KNI5",NA,"Glendale",50.675737,-125.73498,"Biodiversity",15,NA,NA,NA,NA
+"30",2020,"KNI6",NA,"Glendale",50.685717,-125.738223,"Biodiversity",14,NA,NA,NA,NA
+"31",2020,"KNI7",NA,"Hoeya Sill",50.68555,-125.997083,"Biodiversity",20,NA,NA,NA,NA
+"32",2020,"KNI8",NA,"Hoeya Sill",50.686302,-125.994887,"Biodiversity",18,NA,NA,NA,NA
+"33",2020,"KNI9",NA,"Glendale",50.682467,-125.72532,"Seastars",10,NA,NA,NA,9
+"34",2022,"KNI10",NA,"Hoeya Sill",50.688467,-125.994283,"Biodiversity/eDNA",29,NA,NA,NA,NA
+"35",2022,"KNI11",NA,"Hoeya Sound",50.70065,-126.019183,"eDNA",0,NA,NA,NA,NA
+"36",2022,"KNI12",NA,"Prominent Point",50.66795,-126.009033,"Biodiversity/eDNA",27,NA,NA,NA,NA
+"37",2022,"KNI13",NA,"Hoeya Sill",50.688567,-125.9761,"Biodiversity/eDNA",NA,NA,NA,NA,22
+"38",2022,"KNI14",NA,"Prominent Point",50.6671,-126.009533,"Biodiversity/eDNA",14,NA,NA,NA,15
+"39",2022,"KNI15",NA,"Lull Bay",50.692133,-126.033283,"Biodiversity/eDNA",25,NA,NA,NA,NA
+"40",2022,"KNI16",NA,"Lull Bay",50.69365,-126.02615,"Biodiversity/eDNA",13,NA,NA,NA,16
+"41",2022,"KNI17",NA,"Hoeya Sound",50.70411111,-125.95933333,"eDNA",0,NA,NA,NA,NA
+"42",2022,"KNI18",NA,"Hoeya Sound",50.706,-125.95302778,"eDNA",0,NA,NA,NA,NA
