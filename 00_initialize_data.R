@@ -26,8 +26,9 @@ library(tibble)
 library(stringr)
 
 # Save all cleaned datasets as RDS
-setwd("C:/Users/alex.schmill/Documents/knight inlet eDNA/shinyapp/App-1/data") # "C:/Users/alex.schmill/Documents/knight inlet eDNA/shinyapp/App-1/data"
+# setwd("~/Hakai/hakai-knight/knight_inlet_shiny_app/data")
 
+#site_coords <- read_csv("site-coords.csv")
 #### 2023 data -----------------------------------------------------------------
 
 ## load the meta data

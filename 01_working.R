@@ -19,132 +19,162 @@ library(RColorBrewer)
 
 
 # load data ---------------------------------------------------------------
+#hillshade <- raster("data/Bathymetry/Hoeya_1m_NAD83_CSRS_UTMz10_CGVD2013a_HS.tif")
+#classified_hillshade <- raster("data/Hillshade/ClassifiedHillshade.tif")
+#backscatter <- raster("data/Backscatter/BACKSCATTER_KNIGHTINLET_2023_v3.tiff")
+#depth <- raster("data/Bathymetry/Hoeya_1m_NAD83_CSRS_UTMz10_CGVD2013a.tif")
+#substrate_class <- raster("data/Backscatter/SubstrateClassification.tif")
 
-# Load in these objects then return to comments before running app
+#depth_small <- aggregate(depth, fact=20, fun=mean)   # adjust factor for tiny size
+#hillshade_small <- aggregate(hillshade, fact=20, fun=mean)
+
+#saveRDS(depth_small, "data/depth_small.rds")
+#saveRDS(hillshade_small, "data/hillshade_small.rds")
+
+site_coords <- read_csv("data/site-coords.csv", col_types = cols(...1 = col_skip()))
+site_spp_list <- readRDS("data/knight-site-spp-tables.rds")
+species_list <- readRDS("data/knight-species-list.rds")
+depth <- readRDS("data/depth_small.rds")
+hillshade <- readRDS("data/hillshade_small.rds")
 
 
-#site_coords <- site_coords_allyears  # from 00
-
-
-#hillshade <- raster("App-1/data/2023/Bathymetry/Hoeya_1m_NAD83_CSRS_UTMz10_CGVD2013a_HS.tif") 
-#plot(hillshade)
-
-#classified_hillshade <- raster("App-1/data/2023/CLassifiedHillshade.tif")
-#plot(classified_hillshade)
-
-#backscatter <- raster("App-1/data/2023/Backscatter/BACKSCATTER_KNIGHTINLET_2023_v3.tiff")
-#plot(backscatter)
-
-#depth <- raster("App-1/data/2023/Bathymetry/Hoeya_1m_NAD83_CSRS_UTMz10_CGVD2013a.tif") 
-#plot(depth)
-
-#substrate_class <- raster("App-1/data/2023/Backscatter/SubstrateClassification.tif")
-#plot(substrate_class)
-
-## resample the rasters because they take too long to load on the app
-#depth <- aggregate(depth, fact=3, fun=mean) # fact=2 means reducing the resolution by half
-#hillshade <- aggregate(hillshade, fact=2, fun=mean)
-
-#### 3 key data
-####site_coords <- read_csv("App-1/data/site-coords.csv", 
-                       #col_types = cols(...1 = col_skip()))
 #site_coords_2023 <- site_coords %>%
 #filter(year == 2023)
 #site_coords <- site_coords_2023
 
-####site_spp_list <- readRDS("~/knight inlet eDNA/shinyapp/App-1/data/knight-site-spp-tables.rds")
-####species_list <- readRDS("~/knight inlet eDNA/shinyapp/App-1/data/knight-species-list.rds")
 
-# establish pallete
-pal_rich <- colorNumeric(
-  palette = "viridis",
-  domain = site_coords$sppr)
-
-pal_depth <- colorNumeric(
-  palette = viridis::mako(100, direction = -1)[10:100],
-  domain = site_coords_depthnona$max_depth)
-
-pal_coralpres <- colorFactor(
-  palette = c("red","grey90"),
-  levels = c("Yes","No")
-)
-
-pal_habitat <- colorFactor(
-  palette = c(met.brewer("Signac",2)),  # adjust the number as the number habitat types increase
-  domain = site_coords$substrate)
-
-
-
-
-ui <- dashboardPage(
-  dashboardHeader(title = "Biodiveristy in the Gwaxdlala/Nalaxdlala IPCA Marine Refuge", 
-                  titleWidth = 600),  # since we have a long title, we need to extend width element in pixels
-  dashboardSidebar(disable = TRUE),
-  dashboardBody(
-    
-    fluidRow(
-      box(title = "Map", status = "primary", solidHeader = TRUE,
-          leafletOutput("map", width = "100%", height = "700px"), width = 8),
-      box(title = "Species Selector", status = "warning", solidHeader = TRUE,
-          pickerInput(
-            inputId = "speciesSelector",
-            label = "Select a species:", 
-            # choices = full_spp_list,
-            choices = species_list, 
-            multiple = TRUE,
-            options = pickerOptions(liveSearch=T,
-                                    maxOptions = 1),
-            choicesOpt = list(content = species_list),
-            
-          ), choices = NULL, width = 4),  # Placeholder for species choices
-      box(title = "Layers", width = 4, solidHeader = TRUE, status = "primary",
-          checkboxGroupInput("rasterSelect", "Select Raster Layers:",
-                             choices = list("Hillshade" = "hillshade", "Depth" = "depth"))
+ui <- fluidPage(
+  tags$head(
+    tags$style(HTML("
+      html, body {height: 100%; margin: 0;}
+      #map {position: absolute; top: 0; bottom: 0; right: 0; left: 0;}
+      .control-panel {
+        background: rgba(255,255,255,0.95);
+        padding: 22px;
+        border-radius: 15px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+        width: 520px;                /* nice wide panel */
+        overflow-y: auto;            /* scroll if content is taller than screen */
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        position: absolute;
+        top: 20px;
+        bottom: 20px;                /* anchor to bottom for full-height stretch */
+        left: 70px;                  /* moves it to the right of zoom buttons (~50px wide) */
+      }
+      .control-panel h4 {
+        margin-top: 0;
+        font-weight: 600;
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+      .footer {
+        position: absolute;
+        bottom: 12px;
+        right: 15px;
+        background: rgba(255,255,255,0.85);
+        padding: 6px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        color: #555;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      }
+    "))
+  ),
+  
+  # --- Map canvas ---
+  leafletOutput("map", width = "100%", height = "100%"),
+  
+  # --- Floating controls (docked to right of zoom buttons) ---
+  div(class = "control-panel",
+      h4("Biodiveristy in the Gwaxdlala/Nalaxdlala IPCA Marine Refuge"),
+      
+      pickerInput(
+        inputId = "speciesSelector",
+        label = "Select a species:",
+        choices = species_list,
+        multiple = TRUE,
+        options = pickerOptions(liveSearch = TRUE, maxOptions = 1),
+        choicesOpt = list(content = species_list)
       ),
-      box(title = HTML("Color Code"), status = "warning", solidHeader = TRUE,
-          radioGroupButtons(
-            inputId = "colorCode",
-            label = "Color by:", 
-            choices = list("Default" = "default", 
-                           "Total Species" = "richness",
-                           "Substrate" = "habitat",
-                           "Red Tree Coral" = "coralpres",
-                           "Depth" = "depth"),
-            status = "primary",
-            selected = "default",
-            individual = TRUE,
-            checkIcon = list("yes" = icon("check"))
-          ),
-          width = 4),
-      box(title = "Species List", status = "warning", solidHeader = TRUE,
-          reactableOutput("speciesTable", width = "100%", height= '250px'), width = 4)
-    ),
-    
-    fluidRow(id = "footer",
-             column(2),
-             column(8,
-                    HTML("<center><p style='size:18px';>
-                     App Development by Alex Schmill
-                     </p></center>")),
-             column(2)
-             
-    ) # end footer fluidrow
-  )
+      hr(),
+      
+      # --- Raster layers temporarily disabled ---
+      # checkboxGroupInput(
+      #   inputId = "rasterSelect",
+      #   label = "Raster Layers:",
+      #   choices = list("Hillshade" = "hillshade", "Depth" = "depth")
+      # ),
+      # hr(),
+      
+      radioGroupButtons(
+        inputId = "colorCode",
+        label = "Color sites by:",
+        choices = list(
+          "Default" = "default",
+          "Total Species" = "richness",
+          "Substrate" = "habitat",
+          "Red Tree Coral" = "coralpres",
+          "Depth" = "depth"
+        ),
+        status = "primary",
+        selected = "default",
+        individual = TRUE,
+        direction = "vertical",   # stacked neatly
+        checkIcon = list("yes" = icon("check"))
+      ),
+      hr(),
+      
+      h5("Species at Selected Site"),
+      reactableOutput("speciesTable", height = "220px")
+  ),
+  
+  # --- Footer (bottom-right corner) ---
+  div(class = "footer", "App Development by Alex Schmill")
 )
-
-
 
 
 server <- function(input, output, session) {
   
+  # establish pallete
+  pal_rich <- colorNumeric(
+    palette = "viridis",
+    domain = site_coords$sppr)
   
+  pal_depth <- colorNumeric(
+    palette = viridis::mako(100, direction = -1)[10:100],
+    domain = site_coords$max_depth)
+  
+  pal_coralpres <- colorFactor(
+    palette = c("red","grey90"),
+    levels = c("Yes","No")
+  )
+  
+  pal_habitat <- colorFactor(
+    palette = c(met.brewer("Signac",2)),  # adjust the number as the number habitat types increase
+    domain = site_coords$substrate)
   
   # Render map -----------------------------------------------------------------
   output$map <- renderLeaflet({
     
     leaflet(
       options = leaflet::leafletOptions()) %>%
-      addProviderTiles(providers$Esri) %>%
+      #setView(zoom = 13) %>%
+      
+      # Add basemaps with groups
+      addProviderTiles(providers$CartoDB.Positron, group = "Light") %>%
+      addProviderTiles(providers$Esri.WorldImagery, group = "Satellite") %>%
+      addProviderTiles(providers$OpenStreetMap, group = "OSM") %>%
+      addProviderTiles(providers$Esri.WorldTopoMap, group = "Topographic") %>%
+      
+      # Add control to switch between them
+      addLayersControl(
+        baseGroups = c("Light", "Satellite", "OSM", "Topographic"),
+        overlayGroups = c("all_sites","richness","depth","coralpres","habitat","selected_sites"),
+        options = layersControlOptions(collapsed = TRUE)
+      ) %>%
+      
+      # Set default basemap (Light)
+      hideGroup(c("richness","depth","coralpres","habitat")) %>%
       addMapPane("yellow outlines", zIndex=600) %>% 
       addMapPane("depth points",zIndex=500) %>%
       addMapPane("coral points",zIndex=450) %>%
@@ -233,6 +263,8 @@ server <- function(input, output, session) {
                        group = "coralpres") %>%
       hideGroup("coralpres") %>%
       
+      
+      
       # add and hide substrate dots
       addCircleMarkers(data = site_coords,
                        lat = ~lat,
@@ -253,7 +285,15 @@ server <- function(input, output, session) {
                        options = markerOptions(interactive = FALSE,
                                                pane = "coral points"),
                        group = "habitat") %>%
-      hideGroup("habitat")
+      hideGroup("habitat") %>%
+      
+      # --- Automatically fit bounds with padding ---
+      fitBounds(
+        lng1 = min(site_coords$long, na.rm = TRUE) - 0.4,   # expand west
+        lat1 = min(site_coords$lat, na.rm = TRUE) - 0.1,   # expand south
+        lng2 = max(site_coords$long, na.rm = TRUE) ,   # expand east
+        lat2 = max(site_coords$lat, na.rm = TRUE) + 0.1    # expand north
+      )
     
   })  # end render leaflet
   
