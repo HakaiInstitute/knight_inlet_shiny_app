@@ -44,7 +44,8 @@ hillshade <- readRDS("data/hillshade_small.rds")
 
 
 ui <- fluidPage(
-  tags$head(
+  singleton(tags$head(includeHTML("google-analytics.js"))),
+  singleton(tags$head(
     tags$style(HTML("
       html, body {height: 100%; margin: 0;}
       #map {position: absolute; top: 0; bottom: 0; right: 0; left: 0;}
@@ -79,7 +80,7 @@ ui <- fluidPage(
         box-shadow: 0 2px 6px rgba(0,0,0,0.2);
       }
     "))
-  ),
+  )),
   
   # --- Map canvas ---
   leafletOutput("map", width = "100%", height = "100%"),

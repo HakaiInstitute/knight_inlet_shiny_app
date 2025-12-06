@@ -1,0 +1,65 @@
+name: Deploy to tula.shinyapps.io
+
+on: 
+  workflow_dispatch:
+  push:
+    branches: main
+    paths:
+      - '**.R'
+      - '**.rds'
+      - 'data/**'
+
+jobs:
+  deploy-shiny:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.CI_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Install curl ssl dev library
+        run: sudo apt install -y libcurl4-openssl-dev
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+          use-public-rspm: true
+
+      - name: Read script config
+        id: config
+        run: echo "json=$(jq -c . r-config.json)" >> $GITHUB_OUTPUT
+
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache: "always"
+          packages: ${{ join(fromJSON(steps.config.outputs.json).packages, '\n') }}
+          cache-version: 1
+
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache: "always"
+          cache-version: 1
+          packages: ${{ join(fromJSON(steps.config.outputs.json).shiny_packages, '\n') }}
+
+      - name: Push to shiny.io
+        run: |
+          renv::dependencies()
+          options(repos = c(CRAN = 'https://cloud.r-project.org', RSPM = "https://packagemanager.posit.co/cran/latest"))
+          rsconnect::appDependencies(appFiles = c("app.R","data","google-analytics.js"))
+          rsconnect::writeManifest(appFiles = c("app.R","data","google-analytics.js"))
+          rsconnect::setAccountInfo(name='tula', token='${{secrets.SHINYAPPS_TOKEN}}', secret='${{secrets.SHINYAPPS_SECRET}}')
+          rsconnect::deployApp(appName = 'knight_inlet_shiny_app', forceUpdate = TRUE, appFiles = c("app.R","data","google-analytics.js"))
+        shell: Rscript {0}
+
+      - name: Commit manifest
+        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0
+        with:
+          commit_message: "Update manifest.json"
+          file_pattern: "manifest.json"
